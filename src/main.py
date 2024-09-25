@@ -3,8 +3,7 @@ from CDistributedMutex import CDistributedMutex
 import time
 
 if __name__ == "__main__":
-    # Hosts and voting group setup (assuming 3 hosts for simplicity)
-    hosts = [("localhost", 5000), ("localhost", 5001), ("localhost", 5002)]
+    hosts = [("mutex-node-0", 5000), ("mutex-node-1", 5001), ("mutex-node-2", 5002), ("mutex-node-3", 5003)]
     
     # Get the host index from the command-line arguments
     if len(sys.argv) < 2:
@@ -14,7 +13,7 @@ if __name__ == "__main__":
     my_host_index = int(sys.argv[1])  # Get the host index from the arguments
 
     # Initialize the distributed mutex
-    mutex = CDistributedMutex(hostname=f"localhost:{hosts[my_host_index][1]}")
+    mutex = CDistributedMutex(hostname=f"{hosts[my_host_index][0]}:{hosts[my_host_index][1]}")
     mutex.GlobalInitialize(my_host_index, hosts)
 
     # Start the server to accept connections from other processes

@@ -93,6 +93,7 @@ class CDistributedMutex:
         print(f"Voting group for {self.hostname}: {group_hosts}")
     
     def MLockMutex(self):
+        print(f"{self.hostname} attempting to acquire lock.")
         # Step 1: Increment local vector clock before sending the request
         with self.lock:
             self.vector_clock.increment(self.host_id)
@@ -110,6 +111,7 @@ class CDistributedMutex:
         self.in_critical_section = True
     
     def MReleaseMutex(self):
+        print(f"{self.hostname} releasing lock.")
         if self.in_critical_section:
             # Step 5: Release the lock, multicast the release message to the quorum
             release = Message("RELEASE", self.vector_clock.get_clock(), self.host_id)

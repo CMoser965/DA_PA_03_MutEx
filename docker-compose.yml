@@ -1,0 +1,62 @@
+services:
+  mutex-node-0:
+    build:
+      context: .
+      args:
+        PORT: 5000
+        NODE_ID: 0
+    ports:
+      - "5000:5000"
+    deploy:
+      mode: replicated
+      replicas: 1
+    logging:
+      driver: "json-file"
+
+  mutex-node-1:
+    depends_on:
+      - mutex-node-0
+    build:
+      context: .
+      args:
+        PORT: 5001
+        NODE_ID: 1
+    ports:
+      - "5001:5001"
+    deploy:
+      mode: replicated
+      replicas: 1
+    logging:
+      driver: "json-file"
+
+  mutex-node-2:
+    depends_on:
+      - mutex-node-1
+    build:
+      context: .
+      args:
+        PORT: 5002
+        NODE_ID: 2
+    ports:
+      - "5002:5002"
+    deploy:
+      mode: replicated
+      replicas: 1
+    logging:
+      driver: "json-file"
+
+  mutex-node-3:
+    depends_on:
+      - mutex-node-2
+    build:
+      context: .
+      args:
+        PORT: 5003
+        NODE_ID: 3
+    ports:
+      - "5003:5003"
+    deploy:
+      mode: replicated
+      replicas: 1
+    logging:
+      driver: "json-file"
