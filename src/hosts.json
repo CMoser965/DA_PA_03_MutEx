@@ -1,0 +1,8 @@
+{
+    "hosts": [
+        {"host": "localhost", "port": 5000},
+        {"host": "localhost", "port": 5001},
+        {"host": "localhost", "port": 5002},
+        {"host": "localhost", "port": 5003}
+    ]
+}
