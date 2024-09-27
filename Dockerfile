@@ -1,12 +1,10 @@
 FROM python:3.11-alpine AS base
 
-ARG NODE_ID
-ARG PORT
+ARG PORT_ARG=4000
 
-EXPOSE ${PORT}
-ENV ID=${NODE_ID}
+ENV PORT = ${PORT_ARG}
 
 WORKDIR /app
 COPY . /app
 
-CMD python3 /app/src/main.py ${ID}
+CMD python3 /app/src/main.py
